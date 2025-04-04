@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Calendar 2025</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            background-color: #f4f4f4;
+        }
+        .calendar {
+            width: 80%;
+            max-width: 600px;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+        .month {
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+            padding: 10px;
+            background: #007bff;
+            color: white;
+            border-radius: 5px;
+        }
+        .weekdays, .days {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            text-align: center;
+            padding: 10px 0;
+        }
+        .weekdays div {
+            font-weight: bold;
+            color: #333;
+        }
+        .days div {
+            padding: 10px;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+        .days div:hover {
+            background: #007bff;
+            color: white;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <script>
+        const months = [
+            "January", "February", "March", "April", "May", "June", 
+            "July", "August", "September", "October", "November", "December"
+        ];
+        const daysInMonth = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+        const startDays = [3, 6, 6, 2, 4, 7, 2, 5, 1, 3, 6, 1]; // Adjust based on 2025
+
+        document.addEventListener("DOMContentLoaded", () => {
+            const body = document.body;
+            months.forEach((month, index) => {
+                const calendarDiv = document.createElement("div");
+                calendarDiv.classList.add("calendar");
+                calendarDiv.innerHTML = <div class='month'>${month} 2025</div>;
+                
+                const weekdaysDiv = document.createElement("div");
+                weekdaysDiv.classList.add("weekdays");
+                ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].forEach(day => {
+                    weekdaysDiv.innerHTML += <div>${day}</div>;
+                });
+                calendarDiv.appendChild(weekdaysDiv);
+                
+                const daysDiv = document.createElement("div");
+                daysDiv.classList.add("days");
+                for (let i = 0; i < startDays[index]; i++) {
+                    daysDiv.innerHTML += <div></div>;
+                }
+                for (let day = 1; day <= daysInMonth[index]; day++) {
+                    daysDiv.innerHTML += <div>${day}</div>;
+                }
+                calendarDiv.appendChild(daysDiv);
+                body.appendChild(calendarDiv);
+            });
+        });
+    </script>
+</body>
+</html>
