@@ -1,89 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="stylesheet" href="Style.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Calendar 2025</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            background-color: #f4f4f4;
-            padding: 20px;
-        }
-        .calendar {
-            width: 90%;
-            max-width: 600px;
-            background: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-            margin-bottom: 20px;
-        }
-        h2 {
-            text-align: center;
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-        th, td {
-            border: 1px solid #ddd;
-            text-align: center;
-            padding: 10px;
-        }
-        th {
-            background: blue;
-            color: white;
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <h1>Calendar 2025</h1>
-    
-    <script>
-        const months = [
-            "January", "February", "March", "April", "May", "June",
-            "July", "August", "September", "October", "November", "December"
-        ];
-        
-        const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-        
-        function generateCalendar(month, year) {
-            let firstDay = new Date(year, month, 1).getDay();
-            let totalDays = new Date(year, month + 1, 0).getDate();
-            
-            let calendarHtml = <div class='calendar'>;
-            calendarHtml += <h2>${months[month]} ${year}</h2>;
-            calendarHtml += "<table><thead><tr>";
-            
-            days.forEach(day => {
-                calendarHtml += <th>${day}</th>;
-            });
-            calendarHtml += "</tr></thead><tbody><tr>";
-            
-            for (let i = 0; i < firstDay; i++) {
-                calendarHtml += "<td></td>";
-            }
-            
-            for (let day = 1; day <= totalDays; day++) {
-                if ((firstDay + day - 1) % 7 === 0 && day !== 1) {
-                    calendarHtml += "</tr><tr>";
-                }
-                calendarHtml += <td>${day}</td>;
-            }
-            
-            calendarHtml += "</tr></tbody></table></div>";
-            document.body.innerHTML += calendarHtml;
-        }
-        
-        for (let month = 0; month < 12; month++) {
-            generateCalendar(month, 2025);
-        }
-    </script>
+    <div id="calendar-container"></div>
+
+    <script src="script.js"></script>
 </body>
 </html>
