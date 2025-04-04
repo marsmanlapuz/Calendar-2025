@@ -8,9 +8,8 @@
         body {
             font-family: Arial, sans-serif;
             display: flex;
-            justify-content: center;
-            align-items: center;
             flex-direction: column;
+            align-items: center;
             background-color: #f4f4f4;
             padding: 20px;
         }
@@ -51,50 +50,50 @@
     <div id="calendar-container"></div>
 
     <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            const months = [
-                "January", "February", "March", "April", "May", "June",
-                "July", "August", "September", "October", "November", "December"
-            ];
+        const months = [
+            "January", "February", "March", "April", "May", "June",
+            "July", "August", "September", "October", "November", "December"
+        ];
 
-            const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+        const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
-            function createCalendar(month, year) {
-                let calendarHTML = <div class="calendar"><h2>${month} ${year}</h2><table><tr>;
+        function createCalendar(monthIndex, year) {
+            const monthName = months[monthIndex];
+            let calendarHTML = <div class="calendar"><h2>${monthName} ${year}</h2><table><thead><tr>;
 
-                days.forEach(day => {
-                    calendarHTML += <th>${day}</th>;
-                });
-                calendarHTML += </tr>;
+            days.forEach(day => {
+                calendarHTML += <th>${day}</th>;
+            });
+            calendarHTML += </tr></thead><tbody>;
 
-                let firstDay = new Date(year, months.indexOf(month), 1).getDay();
-                let totalDays = new Date(year, months.indexOf(month) + 1, 0).getDate();
+            let firstDay = new Date(year, monthIndex, 1).getDay();
+            let totalDays = new Date(year, monthIndex + 1, 0).getDate();
 
-                let date = 1;
-                for (let i = 0; i < 6; i++) {
-                    calendarHTML += "<tr>";
-                    for (let j = 0; j < 7; j++) {
-                        if (i === 0 && j < firstDay) {
-                            calendarHTML += "<td></td>";
-                        } else if (date > totalDays) {
-                            calendarHTML += "<td></td>";
-                        } else {
-                            calendarHTML += <td>${date}</td>;
-                            date++;
-                        }
+            let date = 1;
+            for (let i = 0; i < 6; i++) {
+                calendarHTML += "<tr>";
+                for (let j = 0; j < 7; j++) {
+                    if (i === 0 && j < firstDay) {
+                        calendarHTML += "<td></td>";
+                    } else if (date > totalDays) {
+                        calendarHTML += "<td></td>";
+                    } else {
+                        calendarHTML += <td>${date}</td>;
+                        date++;
                     }
-                    calendarHTML += "</tr>";
                 }
-                calendarHTML += "</table></div>";
-
-                return calendarHTML;
+                calendarHTML += "</tr>";
+                if (date > totalDays) break;
             }
 
-            const container = document.getElementById("calendar-container");
-            months.forEach(month => {
-                container.innerHTML += createCalendar(month, 2025);
-            });
-        });
+            calendarHTML += "</tbody></table></div>";
+            return calendarHTML;
+        }
+
+        const container = document.getElementById("calendar-container");
+        for (let i = 0; i < 12; i++) {
+            container.innerHTML += createCalendar(i, 2025);
+        }
     </script>
 </body>
 </html>
